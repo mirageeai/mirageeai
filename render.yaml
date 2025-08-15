@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: hexagon-dragon-website
+    env: static
+    buildCommand: null
+    startCommand: null
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_ENV
+        value: production
