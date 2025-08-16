@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #ffe7e7;
+            border: 1px solid #ffb3b3;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌐 Language Switcher Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Current Status</h2>
+        <div id="current-status">Loading...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Language Switching</h2>
+        <button class="button" onclick="testLanguageDetection()">Test Language Detection</button>
+        <button class="button" onclick="testLanguageToggle()">Test Language Toggle</button>
+        <button class="button" onclick="clearLocalStorage()">Clear Local Storage</button>
+        <button class="button" onclick="goToEnglish()">Go to English</button>
+        <button class="button" onclick="goToChinese()">Go to Chinese</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Debug Information</h2>
+        <div id="debug-info"></div>
+    </div>
+
+    <script src="language-switcher.js"></script>
+    <script>
+        let languageSwitcher;
+
+        // Wait for language switcher to initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                languageSwitcher = window.languageSwitcher;
+                updateStatus();
+                updateDebugInfo();
+            }, 100);
+        });
+
+        function updateStatus() {
+            if (languageSwitcher) {
+                const status = document.getElementById('current-status');
+                status.innerHTML = `
+                    <div class="info">
+                        <strong>Current Language:</strong> ${languageSwitcher.getCurrentLanguage()}<br>
+                        <strong>Is Chinese:</strong> ${languageSwitcher.isChinese()}<br>
+                        <strong>Is English:</strong> ${languageSwitcher.isEnglish()}<br>
+                        <strong>Current Path:</strong> ${window.location.pathname}<br>
+                        <strong>Current URL:</strong> ${window.location.href}
+                    </div>
+                `;
+            }
+        }
+
+        function updateDebugInfo() {
+            const debugInfo = document.getElementById('debug-info');
+            const localStorage = window.localStorage;
+            const items = [];
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                items.push(`${key}: ${value}`);
+            }
+            
+            debugInfo.innerHTML = `
+                <div class="info">
+                    <strong>Local Storage Items:</strong><br>
+                    ${items.length > 0 ? items.join('<br>') : 'No items stored'}
+                </div>
+            `;
+        }
+
+        function testLanguageDetection() {
+            if (languageSwitcher) {
+                const detectedLang = languageSwitcher.detectLanguage();
+                alert(`Detected Language: ${detectedLang}`);
+                updateStatus();
+            } else {
+                alert('Language switcher not initialized');
+            }
+        }
+
+        function testLanguageToggle() {
+            if (languageSwitcher) {
+                languageSwitcher.toggleLanguage();
+            } else {
+                alert('Language switcher not initialized');
+            }
+        }
+
+        function clearLocalStorage() {
+            localStorage.clear();
+            alert('Local storage cleared');
+            updateDebugInfo();
+        }
+
+        function goToEnglish() {
+            window.location.href = 'index.html';
+        }
+
+        function goToChinese() {
+            window.location.href = 'index-zh.html';
+        }
+
+        // Update status every 2 seconds
+        setInterval(updateStatus, 2000);
+        setInterval(updateDebugInfo, 2000);
+    </script>
+</body>
+</html>

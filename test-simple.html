@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Language Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .nav { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+        .nav a { margin: 0 10px; padding: 5px 10px; text-decoration: none; }
+        .lang-switch { background: #007bff; color: white; border-radius: 15px; }
+        .content { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">English</a>
+        <a href="index-zh.html">中文</a>
+        <a href="#" class="lang-switch">Switch</a>
+    </div>
+    
+    <div class="content">
+        <h1>Language Switcher Test</h1>
+        <p>Current page: <span id="current-page"></span></p>
+        <p>Detected language: <span id="detected-lang"></span></p>
+        <p>Language switcher status: <span id="switcher-status"></span></p>
+    </div>
+
+    <script src="language-switcher.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = document.getElementById('current-page');
+            const detectedLang = document.getElementById('detected-lang');
+            const switcherStatus = document.getElementById('switcher-status');
+            
+            currentPage.textContent = window.location.pathname;
+            
+            setTimeout(() => {
+                if (window.languageSwitcher) {
+                    detectedLang.textContent = window.languageSwitcher.getCurrentLanguage();
+                    switcherStatus.textContent = 'Working';
+                    
+                    // Update the language switch button
+                    const langSwitch = document.querySelector('.lang-switch');
+                    if (langSwitch) {
+                        langSwitch.textContent = window.languageSwitcher.getCurrentLanguage() === 'zh' ? 'EN' : '中文';
+                        langSwitch.href = window.languageSwitcher.getCurrentLanguage() === 'zh' ? 'index.html' : 'index-zh.html';
+                    }
+                } else {
+                    switcherStatus.textContent = 'Not working';
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

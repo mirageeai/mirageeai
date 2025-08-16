@@ -1,19 +1,16 @@
-// Fixed Language Switcher for HEXAGON DRAGON Website
+// Language Switcher for HEXAGON DRAGON Website
 // Supports Chinese and English versions
 
 class LanguageSwitcher {
     constructor() {
         this.currentLang = this.detectLanguage();
-        this.initialized = false;
         this.init();
     }
 
-    // Detect current language from URL
+    // Detect current language from URL or HTML lang attribute
     detectLanguage() {
         const path = window.location.pathname;
         const filename = path.split('/').pop(); // Get the filename from path
-        
-        console.log('Path:', path, 'Filename:', filename);
         
         if (filename === 'index-zh.html') {
             return 'zh';
@@ -25,16 +22,9 @@ class LanguageSwitcher {
 
     // Initialize language switcher
     init() {
-        if (this.initialized) return;
-        
-        console.log('Initializing language switcher, current language:', this.currentLang);
-        
         this.updateLanguageButton();
         this.addLanguageToggle();
         this.setupLanguagePersistence();
-        
-        this.initialized = true;
-        console.log('Language switcher initialized successfully');
     }
 
     // Update language button text and style
@@ -44,14 +34,10 @@ class LanguageSwitcher {
             if (this.currentLang === 'zh') {
                 langSwitch.textContent = 'EN';
                 langSwitch.href = 'index.html';
-                console.log('Updated button to EN, linking to index.html');
             } else {
                 langSwitch.textContent = '中文';
                 langSwitch.href = 'index-zh.html';
-                console.log('Updated button to 中文, linking to index-zh.html');
             }
-        } else {
-            console.warn('Language switch button not found');
         }
     }
 
@@ -59,17 +45,10 @@ class LanguageSwitcher {
     addLanguageToggle() {
         const langSwitch = document.querySelector('.lang-switch');
         if (langSwitch) {
-            // Remove existing event listeners
-            const newLangSwitch = langSwitch.cloneNode(true);
-            langSwitch.parentNode.replaceChild(newLangSwitch, langSwitch);
-            
-            newLangSwitch.addEventListener('click', (e) => {
+            langSwitch.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('Language switch clicked, current lang:', this.currentLang);
                 this.toggleLanguage();
             });
-            
-            console.log('Language toggle event listener added');
         }
     }
 
@@ -78,8 +57,6 @@ class LanguageSwitcher {
         const currentPath = window.location.pathname;
         let newPath;
 
-        console.log('Toggling language from:', this.currentLang, 'Path:', currentPath);
-
         if (this.currentLang === 'zh') {
             // Switch to English
             if (currentPath.includes('index-zh.html')) {
@@ -87,7 +64,6 @@ class LanguageSwitcher {
             } else {
                 newPath = '/index.html';
             }
-            console.log('Switching to English, new path:', newPath);
         } else {
             // Switch to Chinese
             if (currentPath.includes('index.html')) {
@@ -95,12 +71,10 @@ class LanguageSwitcher {
             } else {
                 newPath = '/index-zh.html';
             }
-            console.log('Switching to Chinese, new path:', newPath);
         }
 
         // Smooth transition
         this.fadeOut(() => {
-            console.log('Redirecting to:', newPath);
             window.location.href = newPath;
         });
     }
@@ -124,14 +98,13 @@ class LanguageSwitcher {
             langSwitch.addEventListener('click', () => {
                 const targetLang = this.currentLang === 'zh' ? 'en' : 'zh';
                 localStorage.setItem('preferred-language', targetLang);
-                console.log('Saved language preference:', targetLang);
             });
         }
 
         // Restore language preference on page load (only if user explicitly chose)
         const savedLang = localStorage.getItem('preferred-language');
         if (savedLang && savedLang !== this.currentLang && this.isFirstVisit()) {
-            console.log('Restoring language preference:', savedLang);
+            // Only redirect if this is not the first visit and user has a preference
             setTimeout(() => {
                 this.redirectToPreferredLanguage(savedLang);
             }, 1000);
@@ -151,10 +124,8 @@ class LanguageSwitcher {
     // Redirect to preferred language
     redirectToPreferredLanguage(targetLang) {
         if (targetLang === 'zh' && this.currentLang === 'en') {
-            console.log('Redirecting to Chinese version');
             window.location.href = '/index-zh.html';
         } else if (targetLang === 'en' && this.currentLang === 'zh') {
-            console.log('Redirecting to English version');
             window.location.href = '/index.html';
         }
     }
@@ -173,35 +144,11 @@ class LanguageSwitcher {
     isEnglish() {
         return this.currentLang === 'en';
     }
-
-    // Debug method
-    debug() {
-        console.log('=== Language Switcher Debug ===');
-        console.log('Current Language:', this.currentLang);
-        console.log('Initialized:', this.initialized);
-        console.log('Current Path:', window.location.pathname);
-        console.log('Language Switch Button:', document.querySelector('.lang-switch'));
-        console.log('Local Storage:', {
-            'preferred-language': localStorage.getItem('preferred-language'),
-            'has-visited-before': localStorage.getItem('has-visited-before')
-        });
-        console.log('===============================');
-    }
 }
 
 // Initialize language switcher when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing language switcher...');
-    
-    // Wait a bit for all elements to be ready
-    setTimeout(() => {
-        window.languageSwitcher = new LanguageSwitcher();
-        
-        // Debug info
-        if (window.languageSwitcher) {
-            window.languageSwitcher.debug();
-        }
-    }, 100);
+    window.languageSwitcher = new LanguageSwitcher();
 });
 
 // Add language detection for search engines
@@ -238,8 +185,6 @@ if (typeof window !== 'undefined') {
         defaultLink.hreflang = 'x-default';
         defaultLink.href = baseUrl + '/index.html';
         head.appendChild(defaultLink);
-        
-        console.log('Hreflang tags added for SEO');
     };
 
     // Add hreflang tags when page loads

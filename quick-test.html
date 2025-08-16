@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Language Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .test-section { 
+            background: #f8f9fa; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+            border: 1px solid #dee2e6;
+        }
+        .button { 
+            background: #007bff; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px; 
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover { background: #0056b3; }
+        .button.success { background: #28a745; }
+        .button.danger { background: #dc3545; }
+        .info { 
+            background: #d1ecf1; 
+            border: 1px solid #bee5eb; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin: 10px 0; 
+        }
+        .error { 
+            background: #f8d7da; 
+            border: 1px solid #f5c6cb; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin: 10px 0; 
+        }
+        .nav-links {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .nav-links a {
+            margin: 0 10px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .nav-links a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Quick Language Switcher Test</h1>
+    
+    <div class="nav-links">
+        <a href="index.html">🇺🇸 English Version</a>
+        <a href="index-zh.html">🇨🇳 Chinese Version</a>
+        <a href="test-language.html">🧪 Full Test Page</a>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Current Status</h2>
+        <div id="current-status">Loading...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Test Functions</h2>
+        <button class="button" onclick="testLanguageDetection()">Test Language Detection</button>
+        <button class="button" onclick="testLanguageToggle()">Test Language Toggle</button>
+        <button class="button success" onclick="clearLocalStorage()">Clear Local Storage</button>
+        <button class="button danger" onclick="resetAll()">Reset All</button>
+    </div>
+
+    <div class="test-section">
+        <h2>🐛 Debug Information</h2>
+        <div id="debug-info">Loading...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Instructions</h2>
+        <div class="info">
+            <strong>How to test:</strong><br>
+            1. Click "Test Language Detection" to see detected language<br>
+            2. Click "Test Language Toggle" to test switching<br>
+            3. Navigate between English and Chinese versions<br>
+            4. Check browser console for detailed logs<br>
+            5. Use "Clear Local Storage" to reset preferences
+        </div>
+    </div>
+
+    <script src="language-switcher.js"></script>
+    <script>
+        let languageSwitcher;
+        let statusInterval;
+        let debugInterval;
+
+        // Wait for language switcher to initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, waiting for language switcher...');
+            
+            setTimeout(() => {
+                languageSwitcher = window.languageSwitcher;
+                if (languageSwitcher) {
+                    console.log('Language switcher found:', languageSwitcher);
+                    updateStatus();
+                    updateDebugInfo();
+                    
+                    // Start auto-update
+                    statusInterval = setInterval(updateStatus, 2000);
+                    debugInterval = setInterval(updateDebugInfo, 2000);
+                } else {
+                    console.error('Language switcher not found');
+                    document.getElementById('current-status').innerHTML = 
+                        '<div class="error">❌ Language switcher not initialized</div>';
+                }
+            }, 500);
+        });
+
+        function updateStatus() {
+            if (languageSwitcher) {
+                const status = document.getElementById('current-status');
+                status.innerHTML = `
+                    <div class="info">
+                        <strong>🌐 Current Language:</strong> ${languageSwitcher.getCurrentLanguage()}<br>
+                        <strong>🇨🇳 Is Chinese:</strong> ${languageSwitcher.isChinese()}<br>
+                        <strong>🇺🇸 Is English:</strong> ${languageSwitcher.isEnglish()}<br>
+                        <strong>📁 Current Path:</strong> ${window.location.pathname}<br>
+                        <strong>🔗 Current URL:</strong> ${window.location.href}<br>
+                        <strong>⚙️ Initialized:</strong> ${languageSwitcher.initialized}
+                    </div>
+                `;
+            }
+        }
+
+        function updateDebugInfo() {
+            const debugInfo = document.getElementById('debug-info');
+            const localStorage = window.localStorage;
+            const items = [];
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                items.push(`${key}: ${value}`);
+            }
+            
+            debugInfo.innerHTML = `
+                <div class="info">
+                    <strong>💾 Local Storage Items:</strong><br>
+                    ${items.length > 0 ? items.join('<br>') : 'No items stored'}
+                </div>
+            `;
+        }
+
+        function testLanguageDetection() {
+            if (languageSwitcher) {
+                const detectedLang = languageSwitcher.detectLanguage();
+                alert(`🔍 Detected Language: ${detectedLang}`);
+                updateStatus();
+            } else {
+                alert('❌ Language switcher not initialized');
+            }
+        }
+
+        function testLanguageToggle() {
+            if (languageSwitcher) {
+                console.log('Testing language toggle...');
+                languageSwitcher.toggleLanguage();
+            } else {
+                alert('❌ Language switcher not initialized');
+            }
+        }
+
+        function clearLocalStorage() {
+            localStorage.clear();
+            alert('🗑️ Local storage cleared');
+            updateDebugInfo();
+        }
+
+        function resetAll() {
+            if (confirm('⚠️ This will clear all data and reload the page. Continue?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            if (statusInterval) clearInterval(statusInterval);
+            if (debugInterval) clearInterval(debugInterval);
+        });
+    </script>
+</body>
+</html>
