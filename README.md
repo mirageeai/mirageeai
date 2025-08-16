@@ -30,7 +30,8 @@
 
 ```
 mirageeai/
-├── index.html          # 主页面
+├── index.html          # 主页面（英文版）
+├── index-zh.html       # 中文版
 ├── styles.css          # 样式文件
 ├── script.js           # JavaScript功能
 └── README.md           # 项目说明

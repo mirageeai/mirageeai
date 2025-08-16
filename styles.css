@@ -105,6 +105,26 @@ body {
     width: 100%;
 }
 
+/* 语言切换按钮样式 */
+.lang-switch {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.lang-switch:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color)) !important;
+}
+
+.lang-switch::after {
+    display: none !important;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
