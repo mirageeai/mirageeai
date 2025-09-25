@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">资讯文章 - HEXAGON DRAGON INTELLIGENT TECHNOLOGY</title>
+    <meta name="description" content="阅读HEXAGON DRAGON INTELLIGENT TECHNOLOGY的最新资讯和洞察">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-dragon"></i>
+                <span>HEXAGON DRAGON</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index-zh.html#vision">愿景</a></li>
+                <li><a href="index-zh.html#about">关于我们</a></li>
+                <li><a href="index-zh.html#services">业务领域</a></li>
+                <li><a href="news-zh.html">资讯</a></li>
+                <li><a href="index-zh.html#contact">联系我们</a></li>
+                <li><a href="#" class="lang-switch">EN</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 文章内容 -->
+    <section class="article-section">
+        <div class="container">
+            <div class="article-content">
+                <div class="article-meta">
+                    <a href="news-zh.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> 返回资讯
+                    </a>
+                    <div class="article-date">
+                        <i class="fas fa-calendar"></i>
+                        <span id="articleDate">2025年1月15日</span>
+                    </div>
+                </div>
+                
+                <article class="article">
+                    <header class="article-header">
+                        <h1 id="articleTitle">文章标题</h1>
+                        <div class="article-image">
+                            <img id="articleImage" src="" alt="文章图片">
+                        </div>
+                    </header>
+                    
+                    <div class="article-body" id="articleBody">
+                        <!-- 文章内容将在这里加载 -->
+                    </div>
+                    
+                    <footer class="article-footer">
+                        <div class="article-tags">
+                            <span class="tag">AI技术</span>
+                            <span class="tag">时尚</span>
+                        </div>
+                        <div class="article-share">
+                            <span>分享这篇文章:</span>
+                            <a href="#" class="share-btn" onclick="shareOnTwitter()">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="share-btn" onclick="shareOnFacebook()">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="share-btn" onclick="shareOnLinkedIn()">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </footer>
+                </article>
+                
+                <div class="related-articles">
+                    <h3>相关文章</h3>
+                    <div class="related-grid" id="relatedArticles">
+                        <!-- 相关文章将在这里加载 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-dragon"></i>
+                        <span>HEXAGON DRAGON</span>
+                    </div>
+                    <p>为年轻小伙伴开发各种好玩的AI小应用，提高生活的乐趣和便利性</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index-zh.html#vision">愿景</a></li>
+                        <li><a href="index-zh.html#about">关于我们</a></li>
+                        <li><a href="index-zh.html#services">业务领域</a></li>
+                        <li><a href="news-zh.html">资讯</a></li>
+                        <li><a href="index-zh.html#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系方式</h4>
+                    <p><i class="fas fa-phone"></i> (+86) 191-5775-2348</p>
+                    <p><i class="fas fa-envelope"></i> it@mirageeai.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HEXAGON DRAGON INTELLIGENT TECHNOLOGY PTE. LTD. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="news.js"></script>
+</body>
+</html>
+

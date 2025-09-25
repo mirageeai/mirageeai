@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">News Article - HEXAGON DRAGON INTELLIGENT TECHNOLOGY</title>
+    <meta name="description" content="Read the latest news and insights from HEXAGON DRAGON INTELLIGENT TECHNOLOGY">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-dragon"></i>
+                <span>HEXAGON DRAGON</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="lang-switch">中文</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <section class="article-section">
+        <div class="container">
+            <div class="article-content">
+                <div class="article-meta">
+                    <a href="news.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to News
+                    </a>
+                    <div class="article-date">
+                        <i class="fas fa-calendar"></i>
+                        <span id="articleDate">January 15, 2025</span>
+                    </div>
+                </div>
+                
+                <article class="article">
+                    <header class="article-header">
+                        <h1 id="articleTitle">Article Title</h1>
+                        <div class="article-image">
+                            <img id="articleImage" src="" alt="Article Image">
+                        </div>
+                    </header>
+                    
+                    <div class="article-body" id="articleBody">
+                        <!-- Article content will be loaded here -->
+                    </div>
+                    
+                    <footer class="article-footer">
+                        <div class="article-tags">
+                            <span class="tag">AI Technology</span>
+                            <span class="tag">Fashion</span>
+                        </div>
+                        <div class="article-share">
+                            <span>Share this article:</span>
+                            <a href="#" class="share-btn" onclick="shareOnTwitter()">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="share-btn" onclick="shareOnFacebook()">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="share-btn" onclick="shareOnLinkedIn()">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </footer>
+                </article>
+                
+                <div class="related-articles">
+                    <h3>Related Articles</h3>
+                    <div class="related-grid" id="relatedArticles">
+                        <!-- Related articles will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-dragon"></i>
+                        <span>HEXAGON DRAGON</span>
+                    </div>
+                    <p>Developing various fun AI applications for young friends to enhance life's joy and convenience</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#vision">Vision</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p><i class="fas fa-phone"></i> (+86) 191-5775-2348</p>
+                    <p><i class="fas fa-envelope"></i> it@mirageeai.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HEXAGON DRAGON INTELLIGENT TECHNOLOGY PTE. LTD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="news.js"></script>
+</body>
+</html>
+
